@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 const queryClient = new QueryClient();
 
-const Home = () => {
+const AllPokemon = () => {
   const [query, setQuery] = useState("");
   const getPokemon = async (q) => {
     const { data } = await axios.get(`/api/search?q=${q}`);
@@ -40,7 +40,7 @@ const Home = () => {
             {data.map((pokemon) => (
               <Col key={pokemon.id} md={4}>
                 {/* link to detail page */}
-                <Link href={`/pokemon/${pokemon.id}`}>
+                <Link href={`/pokemon/${pokemon.name.english}`}>
                   <Card>
                     <Card.Img
                       style={{
@@ -69,7 +69,7 @@ const Home = () => {
 export default function Wrapped() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Home />
+      <AllPokemon />
     </QueryClientProvider>
   );
 }
